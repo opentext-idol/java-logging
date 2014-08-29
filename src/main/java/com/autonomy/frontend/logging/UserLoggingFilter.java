@@ -1,13 +1,11 @@
-package com.autonomy.frontend.logging;
-
 /*
- * $Id: $
- *
- * Copyright (c) 2014, Autonomy Systems Ltd.
- *
- * Last modified by $Author: $ on $Date: $
+ * Copyright 2014 Hewlett-Packard Development Company, L.P.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License.
  */
 
+package com.autonomy.frontend.logging;
+
+import java.security.Principal;
 import org.slf4j.MDC;
 
 import javax.servlet.Filter;
@@ -20,6 +18,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * {@link Filter} implementation that adds the user's IP address and username to the MDC logging context
+ *
+ * The filter takes the following init params:
+ *
+ * <dl>
+ *     <dt>ipKey</dt><dd>The key under which the IP address will be added to the MDC context. Defaults to "ip"</dd>
+ *     <dt>userKey</dt><dd>The key under which the username will be added to the MDC context. Defaults to "username"</dd>
+ *     <dt>usePrincipal</dt><dd>Indicates that the username will be read from the security principal rather than directly from the session.  Defaults to false</dd>
+ *     <dt>userSessionAttribute</dt><dd>The session attribute from which the username will be read.  Has no effect if usePrincipal is set to true. Defaults to "username"</dd>
+ * </dl>
+ */
 public class UserLoggingFilter implements Filter {
 
     private static final String DEFAULT_IP_KEY = "ip";
@@ -29,6 +39,7 @@ public class UserLoggingFilter implements Filter {
     private String ipKey;
     private String userKey;
     private String userSessionAttribute;
+    private boolean usePrincipal;
 
     @Override
     public void destroy() {}
@@ -38,6 +49,7 @@ public class UserLoggingFilter implements Filter {
         this.ipKey = config.getInitParameter("ipKey");
         this.userKey = config.getInitParameter("userKey");
         this.userSessionAttribute = config.getInitParameter("userSessionAttribute");
+        this.usePrincipal = Boolean.valueOf(config.getInitParameter("usePrincipal"));
 
         if (this.ipKey  == null) {
             this.ipKey = DEFAULT_IP_KEY;
@@ -56,8 +68,23 @@ public class UserLoggingFilter implements Filter {
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
         final HttpServletRequest httpRequest = (HttpServletRequest) request;
         final HttpSession session = httpRequest.getSession();
+        final String username;
 
-        MDC.put(userKey, (String) session.getAttribute(userSessionAttribute));
+        if(usePrincipal) {
+            final Principal principal = httpRequest.getUserPrincipal();
+
+            if(principal != null) {
+                username = principal.getName();
+            }
+            else {
+                username = null;
+            }
+        }
+        else {
+            username = (String) session.getAttribute(userSessionAttribute);
+        }
+
+        MDC.put(userKey, username);
         MDC.put(ipKey, httpRequest.getRemoteAddr());
 
         try {

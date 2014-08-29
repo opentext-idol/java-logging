@@ -1,27 +1,30 @@
-package com.autonomy.frontend.logging;
-
 /*
- * $Id: $
- *
- * Copyright (c) 2014, Autonomy Systems Ltd.
- *
- * Last modified by $Author: $ on $Date: $
+ * Copyright 2014 Hewlett-Packard Development Company, L.P.
+ * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License.
  */
+
+package com.autonomy.frontend.logging;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
-import lombok.Setter;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+/**
+ * {@link Filter} implementation for filtering events based on a named marker
+ */
 public class LogbackMarkerFilter extends Filter<ILoggingEvent> {
 
-    @Setter
     private String markerName;
 
     private Marker marker;
 
+    /**
+     * Filter the logging event according to the provided marker
+     * @param event The logging event
+     * @return FilterReply.ACCEPT if the event's marker is the same as the provided marker; FilterReply.DENY otherwise
+     */
     @Override
     public FilterReply decide(final ILoggingEvent event) {
         final Marker marker = event.getMarker();
@@ -33,6 +36,9 @@ public class LogbackMarkerFilter extends Filter<ILoggingEvent> {
         }
     }
 
+    /**
+     * Start the filter. {@link #setMarkerName} should be called before calling this method
+     */
     @Override
     public void start() {
         if (markerName != null) {
@@ -41,4 +47,10 @@ public class LogbackMarkerFilter extends Filter<ILoggingEvent> {
         }
     }
 
+    /**
+     * @param markerName The name of the marker to look for
+     */
+    public void setMarkerName(final String markerName) {
+        this.markerName = markerName;
+    }
 }
