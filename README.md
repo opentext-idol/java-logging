@@ -1,6 +1,6 @@
 # HP Autonomy Logging Utils
 
-[![Build Status](https://travis-ci.org/hpautonomy/logging.svg?branch=master)](https://travis-ci.org/hpautonomy/logging)
+[![Build Status](https://travis-ci.org/hpautonomy/java-logging.svg?branch=master)](https://travis-ci.org/hpautonomy/java-logging)
 
 Logging utilities for HP Autonomy FOSS projects.
 
