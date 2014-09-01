@@ -23,7 +23,7 @@ public class LogbackMarkerFilter extends Filter<ILoggingEvent> {
     /**
      * Filter the logging event according to the provided marker
      * @param event The logging event
-     * @return FilterReply.ACCEPT if the event's marker is the same as the provided marker; FilterReply.DENY otherwise
+     * @return FilterReply.NEUTRAL if the event's marker is the same as the provided marker; FilterReply.DENY otherwise
      */
     @Override
     public FilterReply decide(final ILoggingEvent event) {
