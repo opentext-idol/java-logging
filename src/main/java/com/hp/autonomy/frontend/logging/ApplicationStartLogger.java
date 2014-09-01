@@ -3,7 +3,7 @@
  * Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License.
  */
 
-package com.autonomy.frontend.logging;
+package com.hp.autonomy.frontend.logging;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
