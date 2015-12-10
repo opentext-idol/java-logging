@@ -6,6 +6,8 @@
 package com.hp.autonomy.frontend.logging;
 
 import java.security.Principal;
+
+import lombok.Data;
 import org.slf4j.MDC;
 
 import javax.servlet.Filter;
@@ -30,6 +32,7 @@ import java.io.IOException;
  *     <dt>userSessionAttribute</dt><dd>The session attribute from which the username will be read.  Has no effect if usePrincipal is set to true. Defaults to "username"</dd>
  * </dl>
  */
+@Data
 public class UserLoggingFilter implements Filter {
 
     private static final String DEFAULT_IP_KEY = "ip";
@@ -46,21 +49,21 @@ public class UserLoggingFilter implements Filter {
 
     @Override
     public void init(final FilterConfig config) throws ServletException {
-        this.ipKey = config.getInitParameter("ipKey");
-        this.userKey = config.getInitParameter("userKey");
-        this.userSessionAttribute = config.getInitParameter("userSessionAttribute");
-        this.usePrincipal = Boolean.valueOf(config.getInitParameter("usePrincipal"));
+        ipKey = config.getInitParameter("ipKey");
+        userKey = config.getInitParameter("userKey");
+        userSessionAttribute = config.getInitParameter("userSessionAttribute");
+        usePrincipal = Boolean.valueOf(config.getInitParameter("usePrincipal"));
 
-        if (this.ipKey  == null) {
-            this.ipKey = DEFAULT_IP_KEY;
+        if (ipKey == null) {
+            ipKey = DEFAULT_IP_KEY;
         }
 
-        if (this.userKey == null) {
-            this.userKey = DEFAULT_USER_KEY;
+        if (userKey == null) {
+            userKey = DEFAULT_USER_KEY;
         }
 
-        if (this.userSessionAttribute == null) {
-            this.userSessionAttribute = DEFAULT_USER_SESSION_ATTRIBUTE;
+        if (userSessionAttribute == null) {
+            userSessionAttribute = DEFAULT_USER_SESSION_ATTRIBUTE;
         }
     }
 
@@ -72,13 +75,7 @@ public class UserLoggingFilter implements Filter {
 
         if(usePrincipal) {
             final Principal principal = httpRequest.getUserPrincipal();
-
-            if(principal != null) {
-                username = principal.getName();
-            }
-            else {
-                username = null;
-            }
+            username = principal != null ? principal.getName() : null;
         }
         else {
             username = (String) session.getAttribute(userSessionAttribute);
