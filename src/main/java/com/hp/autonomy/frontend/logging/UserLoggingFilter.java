@@ -8,6 +8,8 @@ package com.hp.autonomy.frontend.logging;
 import java.security.Principal;
 
 import lombok.Data;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 
 import javax.servlet.Filter;
@@ -39,9 +41,9 @@ public class UserLoggingFilter implements Filter {
     private static final String DEFAULT_USER_KEY = "username";
     private static final String DEFAULT_USER_SESSION_ATTRIBUTE = "username";
 
-    private String ipKey;
-    private String userKey;
-    private String userSessionAttribute;
+    private String ipKey = DEFAULT_IP_KEY;
+    private String userKey = DEFAULT_USER_KEY;
+    private String userSessionAttribute = DEFAULT_USER_SESSION_ATTRIBUTE;
     private boolean usePrincipal;
 
     @Override
@@ -49,22 +51,10 @@ public class UserLoggingFilter implements Filter {
 
     @Override
     public void init(final FilterConfig config) throws ServletException {
-        ipKey = config.getInitParameter("ipKey");
-        userKey = config.getInitParameter("userKey");
-        userSessionAttribute = config.getInitParameter("userSessionAttribute");
-        usePrincipal = Boolean.valueOf(config.getInitParameter("usePrincipal"));
-
-        if (ipKey == null) {
-            ipKey = DEFAULT_IP_KEY;
-        }
-
-        if (userKey == null) {
-            userKey = DEFAULT_USER_KEY;
-        }
-
-        if (userSessionAttribute == null) {
-            userSessionAttribute = DEFAULT_USER_SESSION_ATTRIBUTE;
-        }
+        ipKey = StringUtils.defaultIfBlank(config.getInitParameter("ipKey"), ipKey);
+        userKey = StringUtils.defaultIfBlank(config.getInitParameter("userKey"), userKey);
+        userSessionAttribute = StringUtils.defaultIfBlank(config.getInitParameter("userSessionAttribute"), userSessionAttribute);
+        usePrincipal = BooleanUtils.toBooleanDefaultIfNull(BooleanUtils.toBooleanObject(config.getInitParameter("usePrincipal")), usePrincipal);
     }
 
     @Override
