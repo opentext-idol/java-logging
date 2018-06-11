@@ -17,33 +17,33 @@
     <packaging>jar</packaging>
 
 
-    <name>HP Autonomy Java Logging</name>
-    <description>Logging utilities for HP Autonomy FOSS projects</description>
-    <url>https://github.com/hpautonomy/java-logging</url>
+    <name>Micro Focus IDOL Java Logging</name>
+    <description>Logging utilities for Micro Focus IDOL FOSS projects</description>
+    <url>https://github.com/microfocus-idol/java-logging</url>
 
     <scm>
-        <connection>scm:git:git@github.com:hpautonomy/java-logging.git</connection>
-        <developerConnection>scm:git:git@github.com:hpautonomy/java-logging.git</developerConnection>
-        <url>git@github.com:hpautonomy/java-logging.git</url>
+        <connection>scm:git:git@github.com:microfocus-idol/java-logging.git</connection>
+        <developerConnection>scm:git:git@github.com:microfocus-idol/java-logging.git</developerConnection>
+        <url>git@github.com:microfocus-idol/java-logging.git</url>
     </scm>
 
     <issueManagement>
       <system>GitHub</system>
-      <url>https://github.com/hpautonomy/java-logging/issues</url>
+      <url>https://github.com/microfocus-idol/java-logging/issues</url>
     </issueManagement>
 
     <developers>
         <developer>
+            <name>Tung Jin Chew</name>
+            <email>tung-jin.chew@microfocus.com</email>
+            <organization>Micro Focus</organization>
+            <organizationUrl>http://www.microfocus.com</organizationUrl>
+        </developer>
+        <developer>
             <name>Matthew Gordon</name>
-            <email>matthew.gordon2@hp.com</email>
-            <organization>HP</organization>
-            <organizationUrl>http://www.hp.com</organizationUrl>
         </developer>
         <developer>
             <name>Alex Scown</name>
-            <email>alex.scown@hp.com</email>
-            <organization>HP</organization>
-            <organizationUrl>http://www.hp.com</organizationUrl>
         </developer>
     </developers>
 
