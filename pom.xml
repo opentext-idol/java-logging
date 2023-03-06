@@ -17,8 +17,8 @@
     <packaging>jar</packaging>
 
 
-    <name>Micro Focus IDOL Java Logging</name>
-    <description>Logging utilities for Micro Focus IDOL FOSS projects</description>
+    <name>OpenText IDOL Java Logging</name>
+    <description>Logging utilities for OpenText IDOL FOSS projects</description>
     <url>https://github.com/microfocus-idol/java-logging</url>
 
     <scm>
@@ -35,9 +35,6 @@
     <developers>
         <developer>
             <name>Tung Jin Chew</name>
-            <email>tung-jin.chew@microfocus.com</email>
-            <organization>Micro Focus</organization>
-            <organizationUrl>http://www.microfocus.com</organizationUrl>
         </developer>
         <developer>
             <name>Matthew Gordon</name>
