@@ -19,17 +19,17 @@
 
     <name>OpenText IDOL Java Logging</name>
     <description>Logging utilities for OpenText IDOL FOSS projects</description>
-    <url>https://github.com/microfocus-idol/java-logging</url>
+    <url>https://github.com/opentext-idol/java-logging</url>
 
     <scm>
-        <connection>scm:git:git@github.com:microfocus-idol/java-logging.git</connection>
-        <developerConnection>scm:git:git@github.com:microfocus-idol/java-logging.git</developerConnection>
-        <url>git@github.com:microfocus-idol/java-logging.git</url>
+        <connection>scm:git:git@github.com:opentext-idol/java-logging.git</connection>
+        <developerConnection>scm:git:git@github.com:opentext-idol/java-logging.git</developerConnection>
+        <url>git@github.com:opentext-idol/java-logging.git</url>
     </scm>
 
     <issueManagement>
       <system>GitHub</system>
-      <url>https://github.com/microfocus-idol/java-logging/issues</url>
+      <url>https://github.com/opentext-idol/java-logging/issues</url>
     </issueManagement>
 
     <developers>
